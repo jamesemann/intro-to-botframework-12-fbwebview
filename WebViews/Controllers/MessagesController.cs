@@ -27,14 +27,14 @@ namespace WebViews
                 payload = new
                 {
                     template_type = "button",
-                    text = "something...",
+                    text = "Your order is out for delivery today.",
                     buttons = new[]
                     {
                         new
                         {
                             type = "web_url",
-                            url = "https://webviewtest2103.azurewebsites.net/",
-                            title = "click me",
+                            url = "https://webviewtest2103.azurewebsites.net/?q=" + Guid.NewGuid().ToString(),
+                            title = "See on map",
                             webview_height_ratio = "compact",
                             messenger_extensions = true
                         }
