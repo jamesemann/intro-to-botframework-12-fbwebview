@@ -17,20 +17,6 @@ namespace WebViews
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-            // In order to access a webview from a messenger app, it must first be whitelisted
-            // POST https://graph.facebook.com/v2.6/me/thread_settings?access_token=<accesstoken>
-            // Content-Type: application/json
-            // Host: graph.facebook.com
-            // Content-Length: 161
-            // 
-            // {
-            //   "setting_type" : "domain_whitelisting",
-            //   "domain_action_type": "add",
-            //   "whitelisted_domains":[
-            //     "https://webviewtest2103.azurewebsites.net/"
-            //   ]
-            // }
-
             var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
             var reply = activity.CreateReply();
