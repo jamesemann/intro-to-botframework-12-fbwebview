@@ -1,8 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Your delivery</title>
     <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
     <script type='text/javascript'>
         var map;
         var YourBingMapsKey = 'AhdpnABQwrGzOJvoX-cH0eGsHMERG7yvl9dvPQSvCEVZB0qIy4Yy32L8fP2pobpB';
@@ -10,7 +18,7 @@
         function GetMap() {
             map = new Microsoft.Maps.Map('#myMap', {
                 credentials: YourBingMapsKey,
-                zoom: 12
+                zoom: 13
             });
 
             var center = map.getCenter();
@@ -28,10 +36,16 @@
         }
     </script>
     <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.min.css">
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css">
 </head>
 <body>
-    <div id="myMap" style="position:relative;width:100%;height:100%;"></div>
+    
+    <div id="myMap" style="position:relative;width:360px;height:200px;"></div>
+    <div id="thing" class="ms-font" style="position:relative; height:200px; padding: 5px">
+        
+            <span class="ms-font-xxl ms-fontColor-themePrimary">Your delivery is 5 mins away</span>
+        </div>
 </body>
 </html>
 
