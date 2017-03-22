@@ -6,7 +6,8 @@
 	- `Bot Id`
 	- `App Id`
 	- `App Password`
-	Being sure to add the messaging endpoint : `Web App URL/api/messages`
+	
+	Enter the messaging endpoint : `Web App URL/api/messages`
 3. Create a Facebook page/messenger app
    Make a note of:
 	- `Page ID`
@@ -14,7 +15,7 @@
 	- `App ID`
 	- `App Secret`
 4. Configure your bot at dev.botframework.com to distribute your bot on the Facebook Messenger channel.  Use the values collected previously.
-5. Open Webviews.sln and open web.config.  Fill in the `Bot Id`, `App Id`, and `App Password`.  
+5. Open Webviews.sln and open web.config.  Fill in using values collected in step 2.
 6. Publish it out using the publishing profile downloaded in step 1.
 7. Whitelist your WebView https URL using the HTTP client of your choice (Fiddler, CURL, etc.)
 ```
