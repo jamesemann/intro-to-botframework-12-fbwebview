@@ -10,7 +10,7 @@
         function GetMap() {
             map = new Microsoft.Maps.Map('#myMap', {
                 credentials: YourBingMapsKey,
-                zoom: 13
+                zoom: 12
             });
 
             var center = map.getCenter();
@@ -19,7 +19,7 @@
 
             //Create custom Pushpin using a base64 image string.
             var pin = new Microsoft.Maps.Pushpin(center, {
-                icon: base64Image,
+                //icon: base64Image,
                 anchor: new Microsoft.Maps.Point(12, 28)
             });
 
