@@ -1,3 +1,13 @@
+# intro-to-botframework-12-fbwebview
+This example shows you how to utilise the Facebook Messenger extension to provide a Webview experience in your Bot Framework chatbot.
+Used *sparingly and judiciously*, Webview elements can improve interaction while maintaining the 'flow' of the conversation
+This is appropriate any time you want to enable rich content which is above and beyond text or card interactions. 
+Use cases:
+- Displaying interactive maps/visualisations
+- Capturing payment
+- etc.
+
+## Usage
 1. Clone this repo to a directory of your choice `git clone https://github.com/jamesemann/intro-to-botframework-12-fbwebview.git`
 2. Change directory `cd intro-to-botframework-12-fbwebview/`
 3. Create an azure web app to host your webapp.  Download the publishing profile
@@ -30,7 +40,7 @@ Content-Length: 161
   "setting_type" : "domain_whitelisting",
   "domain_action_type": "add",
   "whitelisted_domains":[
-    "https://webviewtest2103.azurewebsites.net/"
+    "https://Web App URL/"
   ]
 }```
 8. Test!
