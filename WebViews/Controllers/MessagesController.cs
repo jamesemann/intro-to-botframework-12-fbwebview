@@ -27,7 +27,7 @@ namespace WebViews
                 payload = new
                 {
                     template_type = "button",
-                    text = "Your order is out for delivery today.",
+                    text = "Your 🍕 is on it's way!",
                     buttons = new[]
                     {
                         new
