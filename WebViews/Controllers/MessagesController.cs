@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WebViews
 {
@@ -14,56 +12,56 @@ namespace WebViews
     public class MessagesController : ApiController
     {
         /// <summary>
-        /// POST: api/Messages
-        /// Receive a message from a user and reply to it
+        ///     POST: api/Messages
+        ///     Receive a message from a user and reply to it
         /// </summary>
-        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+        public async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-            if (activity.Type == ActivityTypes.Message)
-            {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                // calculate something for us to return
-                int length = (activity.Text ?? string.Empty).Length;
+            // In order to access a webview from a messenger app, it must first be whitelisted
+            // POST https://graph.facebook.com/v2.6/me/thread_settings?access_token=<accesstoken>
+            // Content-Type: application/json
+            // Host: graph.facebook.com
+            // Content-Length: 161
+            // 
+            // {
+            //   "setting_type" : "domain_whitelisting",
+            //   "domain_action_type": "add",
+            //   "whitelisted_domains":[
+            //     "https://webviewtest2103.azurewebsites.net/"
+            //   ]
+            // }
 
-                // return our reply to the user
-                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
-                await connector.Conversations.ReplyToActivityAsync(reply);
-            }
-            else
+            var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+
+            var reply = activity.CreateReply();
+
+            var attachment = new
             {
-                HandleSystemMessage(activity);
-            }
+                type = "template",
+                payload = new
+                {
+                    template_type = "button",
+                    text = "something...",
+                    buttons = new[]
+                    {
+                        new
+                        {
+                            type = "web_url",
+                            url = "https://webviewtest2103.azurewebsites.net/",
+                            title = "click me",
+                            webview_height_ratio = "compact",
+                            messenger_extensions = true
+                        }
+                    }
+                }
+            };
+
+            reply.ChannelData = JObject.FromObject(new {attachment});
+
+            await connector.Conversations.ReplyToActivityAsync(reply);
+
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
-        }
-
-        private Activity HandleSystemMessage(Activity message)
-        {
-            if (message.Type == ActivityTypes.DeleteUserData)
-            {
-                // Implement user deletion here
-                // If we handle user deletion, return a real message
-            }
-            else if (message.Type == ActivityTypes.ConversationUpdate)
-            {
-                // Handle conversation state changes, like members being added and removed
-                // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
-                // Not available in all channels
-            }
-            else if (message.Type == ActivityTypes.ContactRelationUpdate)
-            {
-                // Handle add/remove from contact lists
-                // Activity.From + Activity.Action represent what happened
-            }
-            else if (message.Type == ActivityTypes.Typing)
-            {
-                // Handle knowing tha the user is typing
-            }
-            else if (message.Type == ActivityTypes.Ping)
-            {
-            }
-
-            return null;
         }
     }
 }
