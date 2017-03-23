@@ -27,7 +27,7 @@ Use cases:
 	- `App ID`
 	- `App Secret`
 5. Configure your bot at dev.botframework.com to distribute your bot on the Facebook Messenger channel.  Use the values collected previously.
-6. Open Webviews.sln (in the current folder) and open web.config.  Fill in using values collected in step 2.
+6. Open Webviews.sln (in the current folder) and open web.config.  Fill in using values collected in step 2.  Edit the URL on line 36 of MessagesController.cs to point to your URL noted in step 3.
 7. Publish it out using the publishing profile downloaded in step 1.
 8. Whitelist your WebView https URL using the HTTP client of your choice (Fiddler, CURL, etc.)
 ```
